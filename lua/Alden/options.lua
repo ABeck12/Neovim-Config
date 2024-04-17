@@ -13,6 +13,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- vim.cmd.colorscheme "tokyonight"
+-- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme "darcula-solid"
 vim.cmd 'colorscheme darcula-solid'
 vim.cmd 'set termguicolors'
