@@ -4,13 +4,17 @@ return {
     -- or                              , branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
 
+    opts = {
+        inlay_hints = { enabled = true },
+    },
+
     config = function()
         require("telescope").setup()
         local builtin = require("telescope.builtin")
-        vim.keymap.set('n', '<leader>pf', builtin.find_files, {desc="Open File"})
+        vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "Open File" })
         -- vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
         --s vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-        vim.keymap.set('n', '<leader>pg', builtin.git_files, {desc = "Open Git File"})
+        vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = "Open Git File" })
 
         vim.keymap.set('n', '<leader>/', function()
             -- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -49,12 +53,12 @@ return {
                         callback = vim.lsp.buf.clear_references,
                     })
                 end
-
-                if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-                    map('<leader>th', function()
-                        vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-                    end, '[T]oggle Inlay [H]ints')
-                end
+                -- vim.lsp.buf.inlay_hint(0, true)
+                -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+                --     map('<leader>th', function()
+                --         vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                --     end, '[T]oggle Inlay [H]ints')
+                -- end
             end
         })
     end

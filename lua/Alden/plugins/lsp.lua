@@ -1,5 +1,10 @@
 return {
     "neovim/nvim-lspconfig",
+
+    opts = {
+        inlay_hints = { enabled = true },
+    },
+
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
@@ -50,11 +55,6 @@ return {
                         }
                     }
                 end,
-
-                -- ["clangd"] = function()
-                --     local lspconfig = require("lspconfig")
-                --     vim.keymap.set("n", "<leader>o", lspconfig.clangd.ClangdSwitchSourceHeader())
-                -- end
             }
         })
 
@@ -71,6 +71,7 @@ return {
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                 -- ['<C-y>'] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
+                ["<Enter>"] = cmp.mapping.confirm({ select = true }),
                 ["<Tab>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources({
