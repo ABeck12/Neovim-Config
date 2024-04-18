@@ -4,9 +4,9 @@ return {
     -- or                              , branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
 
-    opts = {
-        inlay_hints = { enabled = true },
-    },
+    -- opts = {
+    --     inlay_hints = { enabled = true },
+    -- },
 
     config = function()
         require("telescope").setup()
@@ -53,12 +53,12 @@ return {
                         callback = vim.lsp.buf.clear_references,
                     })
                 end
-                -- vim.lsp.buf.inlay_hint(0, true)
-                -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-                --     map('<leader>th', function()
-                --         vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-                --     end, '[T]oggle Inlay [H]ints')
-                -- end
+                -- vim.lsp.buf.inlay_hint.enable(0, true)
+                if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+                    map('<leader>th', function()
+                        vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                    end, '[T]oggle Inlay [H]ints')
+                end
             end
         })
     end
