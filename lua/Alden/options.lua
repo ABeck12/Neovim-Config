@@ -17,14 +17,14 @@ vim.opt.expandtab = true
 vim.cmd 'set signcolumn=yes'
 
 -- vim.cmd.colorscheme("darcula")
-vim.cmd.colorscheme("darcula-dark")
+-- vim.cmd.colorscheme("darcula-dark")
 
 -- vim.cmd.colorscheme("ayu-dark")
 -- vim.cmd.colorscheme "tokyonight"
 -- vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme "darcula-solid"
--- vim.cmd 'colorscheme darcula-solid'
--- vim.cmd 'set termguicolors'
+vim.cmd 'colorscheme darcula-solid'
+vim.cmd 'set termguicolors'
 
 
 vim.cmd('hi! LineNr guibg=none ctermbg=none')
