@@ -16,6 +16,8 @@ vim.opt.expandtab = true
 
 vim.cmd 'set signcolumn=yes'
 
+vim.opt.incsearch = true
+
 -- vim.cmd.colorscheme("darcula")
 -- vim.cmd.colorscheme("darcula-dark")
 

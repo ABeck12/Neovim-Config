@@ -9,12 +9,13 @@ vim.keymap.set('n', 'yap', 'vapy', { desc = "Yank around paragraph" })
 
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format" })
 
-vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader, { desc = "Swap source and header C/C++"})
+vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader, { desc = "Swap source and header C/C++" })
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("i", "<C-h>", "<C-W>", { noremap = true })
+vim.keymap.set("c", "<C-h>", "<C-W>", { noremap = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
@@ -27,3 +28,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Append to current paragraph" })
+
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+-- vim.keymap.set('i', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('i', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('i', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('i', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+-- vim.keymap.set('v', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('v', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('v', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('v', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+--
+-- vim.api.nvim_set_keymap('t', '<Leader><ESC>', '<C-\\><C-n>', { noremap = true })
