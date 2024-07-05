@@ -18,7 +18,7 @@ vim.cmd 'set signcolumn=yes'
 
 vim.opt.incsearch = true
 
-vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd [[colorscheme tokyonight-night]]
 
 vim.o.pumheight = 15
 
