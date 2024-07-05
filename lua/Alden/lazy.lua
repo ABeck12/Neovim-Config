@@ -13,5 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = "Alden.plugins",
-    change_detection = { notify = false }
+    change_detection = { notify = false },
+    install = {
+        colorscheme = { "tokyonight-night"}
+    }
 })

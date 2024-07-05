@@ -1,4 +1,8 @@
 return {
     -- Adds indent guides
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+        indent = {  char = "▏" }
+    },
 }

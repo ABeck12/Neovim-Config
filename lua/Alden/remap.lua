@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open File Explorer" })
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "[P]re[v]iew File Tree" })
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -7,9 +7,17 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
 vim.keymap.set('n', 'yap', 'vapy', { desc = "Yank around paragraph" })
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format" })
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat" })
 
-vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader, { desc = "Swap source and header C/C++" })
+vim.keymap.set("n", "<A-o>",
+    function()
+        local status_ok = pcall(vim.cmd.ClangdSwitchSourceHeader)
+        if not status_ok then
+            return
+        end
+    end,
+    { desc = "Swap source and header C/C++" }
+)
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -29,19 +37,37 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Append to current paragraph" })
 
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<A-w>",
+    function()
+        local buffers = vim.api.nvim_list_bufs()
+        local numNonEmptyBuffers = 0
+        for _, bufnr in ipairs(buffers) do
+            if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buftype') == '' and
+                vim.api.nvim_buf_get_name(bufnr) ~= "" then
+                numNonEmptyBuffers = numNonEmptyBuffers + 1
+            end
+        end
 
--- vim.keymap.set('i', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('i', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('i', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('i', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+        if numNonEmptyBuffers > 0 then
+            vim.cmd.bd()
+        end
 
--- vim.keymap.set('v', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('v', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('v', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('v', '<down>', '<cmd>echo "Use j to move!!"<CR>')
---
--- vim.api.nvim_set_keymap('t', '<Leader><ESC>', '<C-\\><C-n>', { noremap = true })
+        local buffers2 = vim.api.nvim_list_bufs()
+        local numEmptyBuffers2 = 0
+        for _, bufnr in ipairs(buffers2) do
+            if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buftype') == '' and
+                vim.api.nvim_buf_get_name(bufnr) == "" then
+                numEmptyBuffers2 = numEmptyBuffers2 + 1
+            end
+        end
+
+        if numEmptyBuffers2 == 1 then
+            vim.cmd.Alpha()
+        end
+    end,
+    { desc = "Close current buffer" }
+)
+vim.keymap.set("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>", { desc = "Go to next buffer" })     --"  cycle next buffer"
+vim.keymap.set("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>", { desc = "Go to previous buffer" }) --"  cycle prev buffer"
+vim.keymap.set("n", "<A->>", "<cmd> BufferLineMoveNext <CR>", { desc = "Move next buffer" })       --"  cycle next buffer"
+vim.keymap.set("n", "<A-<>", "<cmd> BufferLineMovePrev <CR>", { desc = "Move previous buffer" })   --"  cycle prev buffer"

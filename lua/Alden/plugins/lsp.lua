@@ -4,7 +4,9 @@ return {
     opts = {
         inlay_hints = { enabled = true },
     },
-
+    event = {
+        "BufReadPre", "BufNewFile"
+    },
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",

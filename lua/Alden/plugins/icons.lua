@@ -14,4 +14,5 @@ return {
             mappings = {}, -- Custom key mappings
         }
     end
+    
 }
