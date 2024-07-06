@@ -71,3 +71,8 @@ vim.keymap.set("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>", { desc = "Go to n
 vim.keymap.set("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>", { desc = "Go to previous buffer" }) --"  cycle prev buffer"
 vim.keymap.set("n", "<A->>", "<cmd> BufferLineMoveNext <CR>", { desc = "Move next buffer" })       --"  cycle next buffer"
 vim.keymap.set("n", "<A-<>", "<cmd> BufferLineMovePrev <CR>", { desc = "Move previous buffer" })   --"  cycle prev buffer"
+
+vim.keymap.set("n", "<A-h>", "<C-w>h")
+vim.keymap.set("n", "<A-j>", "<C-w>j")
+vim.keymap.set("n", "<A-k>", "<C-w>k")
+vim.keymap.set("n", "<A-l>", "<C-w>l")
