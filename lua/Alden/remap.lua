@@ -11,6 +11,7 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat" })
 
 vim.keymap.set("n", "<A-o>",
     function()
+        vim.cmd("w")
         local status_ok = pcall(vim.cmd.ClangdSwitchSourceHeader)
         if not status_ok then
             return
