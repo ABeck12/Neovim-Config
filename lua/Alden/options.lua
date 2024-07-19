@@ -18,8 +18,8 @@ vim.cmd 'set signcolumn=yes'
 
 vim.opt.incsearch = true
 
--- vim.cmd [[colorscheme tokyonight-night]]
-vim.cmd [[colorscheme darcula]]
+vim.cmd [[colorscheme tokyonight-night]]
+-- vim.cmd [[colorscheme darcula]]
 -- vim.cmd [[colorscheme kanagawa-dragon]]
 -- vim.cmd [[colorscheme rose-pine]]
 
