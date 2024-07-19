@@ -69,10 +69,10 @@ vim.keymap.set("n", "<A-w>",
     { desc = "Close current buffer" }
 )
 
-vim.keymap.set("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>", { desc = "Go to next buffer" })     --"  cycle next buffer"
-vim.keymap.set("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>", { desc = "Go to previous buffer" }) --"  cycle prev buffer"
-vim.keymap.set("n", "<A->>", "<cmd> BufferLineMoveNext <CR>", { desc = "Move next buffer" })       --"  cycle next buffer"
-vim.keymap.set("n", "<A-<>", "<cmd> BufferLineMovePrev <CR>", { desc = "Move previous buffer" })   --"  cycle prev buffer"
+vim.keymap.set("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>", { desc = "Go to next buffer" }) --"  cycle next buffer"
+vim.keymap.set("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>", { desc = "Go to previous buffer" })       --"  cycle prev buffer"
+vim.keymap.set("n", "<A->>", "<cmd> BufferLineMoveNext <CR>", { desc = "Move next buffer" })             --"  cycle next buffer"
+vim.keymap.set("n", "<A-<>", "<cmd> BufferLineMovePrev <CR>", { desc = "Move previous buffer" })         --"  cycle prev buffer"
 
 vim.keymap.set("n", "<A-h>", "<C-w>h")
 vim.keymap.set("n", "<A-j>", "<C-w>j")

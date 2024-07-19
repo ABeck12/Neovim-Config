@@ -18,23 +18,24 @@ vim.cmd 'set signcolumn=yes'
 
 vim.opt.incsearch = true
 
-vim.cmd [[colorscheme tokyonight-night]]
--- vim.cmd [[colorscheme darcula]]
--- vim.cmd [[colorscheme darcula-dark]]
+-- vim.cmd [[colorscheme tokyonight-night]]
+vim.cmd [[colorscheme darcula]]
 -- vim.cmd [[colorscheme kanagawa-dragon]]
 -- vim.cmd [[colorscheme rose-pine]]
 
+vim.opt.termguicolors = true
 
 function LineNumberColors()
     -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#51B3EC', bold=true })
-    vim.api.nvim_set_hl(0, 'LineNr', { fg='white', bold=true })
+    vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
     -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#FB508F', bold=true })
 end
+
 LineNumberColors()
 
 vim.o.pumheight = 15
 
-vim.o.hidden = false
+vim.o.hidden = true
 
 vim.opt.laststatus = 3
 
@@ -47,4 +48,3 @@ for key, hl_group in pairs(hl_groups) do
 end
 
 vim.g.netrw_banner = 0
-
