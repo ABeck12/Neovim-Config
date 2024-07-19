@@ -1,24 +1,24 @@
 return {
     "neovim/nvim-lspconfig",
 
-    opts = {
-        inlay_hints = { enabled = true },
-    },
     event = {
         "BufReadPre", "BufNewFile"
     },
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+
+        -- cmp is an auto complete framework
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
+
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-        "j-hui/fidget.nvim",
-        "onsails/lspkind.nvim"
+        "j-hui/fidget.nvim",   -- for the pop ups in the bottom right
+        "onsails/lspkind.nvim" -- for ui
     },
 
     config = function()
@@ -28,9 +28,10 @@ return {
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+            cmp_lsp.default_capabilities()
+        )
 
-        require("fidget").setup({})
+        require("fidget").setup()
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -80,6 +81,7 @@ return {
                     require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
                 end,
             },
+
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
@@ -88,6 +90,7 @@ return {
                 ["<Enter>"] = cmp.mapping.confirm({ select = true }),
                 ["<Tab>"] = cmp.mapping.confirm({ select = true }),
             }),
+
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' }, -- For luasnip users.
@@ -95,13 +98,14 @@ return {
                 { name = 'buffer' },
             }),
 
+            -- ui settings for cmp
             window = {
                 documentation = {
                     -- border = "rounded",                                                                         -- single|rounded|none
                     winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
                 },
                 completion = {
-                    -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
                     -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
                     -- border = "rounded", -- single|rounded|none
                     col_offset = -3,
@@ -109,9 +113,9 @@ return {
                 },
             },
 
+            -- formatting determines how each item in the auto complete dropdown will look
             formatting = {
                 fields = { "kind", "abbr", "menu" },
-                -- fields = { "abbr", "kind", "menu" },
                 format = function(entry, vim_item)
                     local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
                     local strings = vim.split(kind.kind, "%s", { trimempty = true })
@@ -138,15 +142,15 @@ return {
         })
 
         vim.diagnostic.config({
-            -- update_in_insert = true,
             float = {
                 focusable = false,
                 style = "minimal",
-                border = "rounded",
+                -- border = "rounded",
                 source = "always",
                 header = "",
                 prefix = "",
             },
         })
     end
+
 }
