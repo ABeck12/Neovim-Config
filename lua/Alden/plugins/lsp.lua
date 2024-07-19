@@ -69,7 +69,25 @@ return {
                             "--header-insertion=never"
                         }
                     }
+                end,
+
+                ["pylsp"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.pylsp.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            pylsp = {
+                                plugins = {
+                                    pycodestyle = {
+                                        enabled = true,
+                                        maxLineLength = 120
+                                    },
+                                }
+                            }
+                        }
+                    }
                 end
+
             }
         })
 
