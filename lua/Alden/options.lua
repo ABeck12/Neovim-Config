@@ -19,11 +19,13 @@ vim.cmd 'set signcolumn=yes'
 vim.opt.incsearch = true
 
 vim.cmd [[colorscheme tokyonight-night]]
+-- vim.cmd [[colorscheme kanagawa-dragon]]
+-- vim.cmd [[colorscheme rose-pine]]
 
 function LineNumberColors()
-    vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#51B3EC', bold=true })
+    -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#51B3EC', bold=true })
     vim.api.nvim_set_hl(0, 'LineNr', { fg='white', bold=true })
-    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#FB508F', bold=true })
+    -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#FB508F', bold=true })
 end
 LineNumberColors()
 

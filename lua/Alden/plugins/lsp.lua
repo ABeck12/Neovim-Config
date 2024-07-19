@@ -18,6 +18,7 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        "onsails/lspkind.nvim"
     },
 
     config = function()
@@ -37,7 +38,6 @@ return {
                 "rust_analyzer",
                 "clangd",
                 "pylsp",
-                -- "pyright",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -72,8 +72,8 @@ return {
             }
         })
 
+        -- Setting up dropdown menu config
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -93,7 +93,48 @@ return {
                 { name = 'luasnip' }, -- For luasnip users.
             }, {
                 { name = 'buffer' },
-            })
+            }),
+
+            window = {
+                documentation = {
+                    -- border = "rounded",                                                                         -- single|rounded|none
+                    winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
+                },
+                completion = {
+                    -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+                    -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
+                    -- border = "rounded", -- single|rounded|none
+                    col_offset = -3,
+                    side_padding = 0,
+                },
+            },
+
+            formatting = {
+                fields = { "kind", "abbr", "menu" },
+                -- fields = { "abbr", "kind", "menu" },
+                format = function(entry, vim_item)
+                    local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+                    local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                    kind.kind = " " .. (strings[1] or "") .. " "
+                    kind.menu = "    (" .. (strings[2] or "") .. ")"
+                    return kind
+                end,
+            },
+
+            -- formatting = {
+            --     format = function(entry, vim_item),
+            --         if vim.tbl_contains({ 'path' }, entry.source.name) then
+            --             local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+            --             if icon then
+            --                 vim_item.kind = icon
+            --                 vim_item.kind_hl_group = hl_group
+            --                 return vim_item
+            --             end
+            --         end
+            --         return require("lspkind").cmp_format({ with_text = false })(entry, vim_item)
+            --     end,
+            -- },
+
         })
 
         vim.diagnostic.config({

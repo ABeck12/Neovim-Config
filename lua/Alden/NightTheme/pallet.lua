@@ -1,8 +1,8 @@
 return {
-	darkBackground = "#1a1a1a", -- Use for background 
-    lightBackground = "#1f1f1f", -- Use for background 
-    
-    green = "#608B4E", -- For strings
+    darkBackground = "#1a1a1a",  -- Use for background
+    lightBackground = "#1f1f1f", -- Use for background
+
+    green = "#608B4E",           -- For strings
     lightOrange = "#ff9800",
     darkOrange = "#CC682E",
     lightPurple = "#b392f0",
@@ -16,3 +16,4 @@ return {
 
     yellow = "#FFC66D",
 }
+
