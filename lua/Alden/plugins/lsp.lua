@@ -39,6 +39,7 @@ return {
                 "rust_analyzer",
                 "clangd",
                 "pylsp",
+                "glsl_analyzer",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -65,8 +66,8 @@ return {
                     local lspconfig = require("lspconfig")
                     lspconfig.clangd.setup {
                         capabilities = capabilities,
-                        settings = {
-                            "--header-insertion=never"
+                        cmd = {
+                            "clangd", "--header-insertion=never"
                         }
                     }
                 end,

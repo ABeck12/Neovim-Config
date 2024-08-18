@@ -27,7 +27,11 @@ vim.opt.termguicolors = true
 
 function LineNumberColors()
     -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#51B3EC', bold=true })
-    vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
+    -- vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true })
+    -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#a9b1d6', bold=true }) -- whiteish
+    vim.api.nvim_set_hl(0, 'LineNr', { fg = '#ff9e64', bold = true }) -- orange
+    -- vim.api.nvim_set_hl(0, 'LineNr', { fg = '#7aa2f7', bold = true }) -- light blue
+    -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#a9b1d6', bold=true }) -- whiteish
     -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#FB508F', bold=true })
 end
 

@@ -57,12 +57,6 @@ return {
                     })
                 end
 
-                -- vim.lsp.buf.inlay_hint.enable(0, true)
-                -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-                --     map('<leader>th', function()
-                --         vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-                --     end, '[T]oggle Inlay [H]ints')
-                -- end
             end
         })
     end

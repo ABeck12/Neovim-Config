@@ -1,12 +1,14 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Explore, { desc = "[P]re[v]iew File Tree", noremap = true })
 
+vim.keymap.set("n", "<leader>hh", ":%s//g<left><left>", { desc = "Find and replace global" })
+vim.keymap.set("n", "<leader>hg", ":%s//gc<left><left><left>", { desc = "Find and replace confirmation" })
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
-vim.keymap.set('n', 'yap', 'vapy', { desc = "Yank around paragraph" })
+vim.keymap.set('n', 'yap', 'vapy', { desc = "[Y]ank [A]round [P]aragraph" })
 
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat" })
 
@@ -102,4 +104,3 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix" })
 
 vim.keymap.set("n", "<leader>ti", ":InlayHintsToggle <CR>", { desc = "[T]oggle [I]nlay hints" })
-

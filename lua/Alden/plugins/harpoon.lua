@@ -19,6 +19,7 @@ return {
         vim.keymap.set("n", "<A-4>", function() harpoon:list():select(4) end)
 
         -- -- Toggle previous & next buffers stored within Harpoon list
+        -- Alt j,k are used for moving around multiple windows
         -- vim.keymap.set("n", "<A-j>", function() harpoon:list():prev() end)
         -- vim.keymap.set("n", "<A-k>", function() harpoon:list():next() end)
 
