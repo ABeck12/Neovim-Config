@@ -38,7 +38,9 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "clangd",
-                "pylsp",
+                "basedpyright",
+                "ruff",
+                -- "pylsp",
                 "glsl_analyzer",
             },
             handlers = {
@@ -72,22 +74,54 @@ return {
                     }
                 end,
 
-                ["pylsp"] = function()
+                ["basedpyright"] = function()
                     local lspconfig = require("lspconfig")
-                    lspconfig.pylsp.setup {
+                    lspconfig.basedpyright.setup {
                         capabilities = capabilities,
                         settings = {
-                            pylsp = {
-                                plugins = {
-                                    pycodestyle = {
-                                        enabled = true,
-                                        maxLineLength = 120
-                                    },
-                                }
+                            -- pyright = { autoImportCompletion = true }
+                        },
+                        python = {
+                            analysis = {
+                                typeCheckingMode = "basic"
                             }
                         }
                     }
-                end
+                end,
+
+                -- ["pylsp"] = function()
+                --     local lspconfig = require("lspconfig")
+                --     lspconfig.pylsp.setup {
+                --         capabilities = capabilities,
+                --         settings = {
+                --             pylsp = {
+                --                 plugins = {
+                --                     pycodestyle = {
+                --                         enabled = true,
+                --                         maxLineLength = 120
+                --                     },
+                --                     -- black = { enabled = true },
+                --                     -- autopep8 = { enabled = false },
+                --                     -- yapf = { enabled = false },
+                --                     -- linter options
+                --                     -- pylint = { enabled = true, executable = "pylint" },
+                --                     -- pyflakes = { enabled = false },
+                --                     -- type checker
+                --                     pylsp_mypy = {
+                --                         enabled = true,
+                --                         overrides = { "--python-executable", py_path, true },
+                --                         -- report_progress = true,
+                --                         -- live_mode = false
+                --                     },
+                --                     -- auto-completion options
+                --                     -- jedi_completion = { fuzzy = true },
+                --                     -- import sorting
+                --                     -- pyls_isort = { enabled = true },
+                --                 }
+                --             }
+                --         }
+                --     }
+                -- end
 
             }
         })
