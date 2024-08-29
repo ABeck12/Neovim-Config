@@ -39,10 +39,7 @@ return {
                 -- "rust_analyzer",
                 "clangd",
                 "basedpyright",
-                -- "ruff",
                 "ruff_lsp",
-                -- "pylsp",
-                -- "glsl_analyzer",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -93,40 +90,6 @@ return {
                         },
                     }
                 end,
-
-                -- ["pylsp"] = function()
-                --     local lspconfig = require("lspconfig")
-                --     lspconfig.pylsp.setup {
-                --         capabilities = capabilities,
-                --         settings = {
-                --             pylsp = {
-                --                 plugins = {
-                --                     pycodestyle = {
-                --                         enabled = true,
-                --                         maxLineLength = 120
-                --                     },
-                --                     -- black = { enabled = true },
-                --                     -- autopep8 = { enabled = false },
-                --                     -- yapf = { enabled = false },
-                --                     -- linter options
-                --                     -- pylint = { enabled = true, executable = "pylint" },
-                --                     -- pyflakes = { enabled = false },
-                --                     -- type checker
-                --                     pylsp_mypy = {
-                --                         enabled = true,
-                --                         overrides = { "--python-executable", py_path, true },
-                --                         -- report_progress = true,
-                --                         -- live_mode = false
-                --                     },
-                --                     -- auto-completion options
-                --                     -- jedi_completion = { fuzzy = true },
-                --                     -- import sorting
-                --                     -- pyls_isort = { enabled = true },
-                --                 }
-                --             }
-                --         }
-                --     }
-                -- end
 
             }
         })
