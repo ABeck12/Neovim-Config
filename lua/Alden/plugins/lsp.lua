@@ -36,12 +36,13 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                "rust_analyzer",
+                -- "rust_analyzer",
                 "clangd",
                 "basedpyright",
-                "ruff",
+                -- "ruff",
+                "ruff_lsp",
                 -- "pylsp",
-                "glsl_analyzer",
+                -- "glsl_analyzer",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -79,13 +80,17 @@ return {
                     lspconfig.basedpyright.setup {
                         capabilities = capabilities,
                         settings = {
-                            -- pyright = { autoImportCompletion = true }
-                        },
-                        python = {
-                            analysis = {
-                                typeCheckingMode = "basic"
+                            pyright = {
+                                autoImportCompletion = true,
+                                disableOrganizeImports = true,
+                            },
+                            python = {
+                                analysis = {
+                                    typeCheckingMode = "basic"
+                                },
+                                pythonPath = vim.fn.exepath("python3"),
                             }
-                        }
+                        },
                     }
                 end,
 
