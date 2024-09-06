@@ -10,6 +10,7 @@ return {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
         "williamboman/mason-lspconfig.nvim",
 
+        { 'j-hui/fidget.nvim', opts = {} },
         "hrsh7th/nvim-cmp",
     },
 
