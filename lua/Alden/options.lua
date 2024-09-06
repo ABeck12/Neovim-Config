@@ -17,7 +17,10 @@ vim.opt.expandtab = true
 vim.cmd 'set signcolumn=yes'
 
 vim.opt.incsearch = true
+vim.opt.hlsearch = true
 
+vim.o.timeout = true
+vim.o.timeoutlen = 300
 
 -- Colors
 vim.cmd [[colorscheme tokyonight-night]]
@@ -60,3 +63,6 @@ vim.o.hidden = true
 vim.opt.laststatus = 3
 
 vim.g.netrw_banner = 0
+
+vim.opt.swapfile = false
+vim.opt.backup = false

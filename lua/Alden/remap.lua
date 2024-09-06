@@ -1,39 +1,25 @@
+local utils = require("utils")
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Explore, { desc = "[P]re[v]iew File Tree", noremap = true })
 
 vim.keymap.set("n", "<leader>hh", ":%s//g<left><left>", { desc = "Find and replace global" })
 vim.keymap.set("n", "<leader>hg", ":%s//gc<left><left><left>", { desc = "Find and replace confirmation" })
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
 vim.keymap.set('n', 'yap', 'vapy', { desc = "[Y]ank [A]round [P]aragraph" })
 
-vim.keymap.set("n", "<leader>f", function()
-    local function is_lsp_attached()
-        local clients = vim.lsp.get_active_clients()
-        local buffer = vim.api.nvim_get_current_buf()
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "[P]aste into void register" })
 
-        for _, client in pairs(clients) do
-            if client.attached_buffers[buffer] then
-                return true
-            end
-        end
-        return false
-    end
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "[Y]ank to system clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "[Y]ank to system clipboard" })
 
-    if is_lsp_attached() then
-        -- format using lsp if attached
-        vim.lsp.buf.format()
-    else
-        -- otherwise use vim to reindent
-        local cursor_position = vim.api.nvim_win_get_cursor(0)
-        vim.cmd("normal! ggVG=")
-        vim.api.nvim_win_set_cursor(0, cursor_position)
-    end
-end, { desc = "[F]ormat" }
-)
+vim.keymap.set("n", "<leader>f", utils.format, { desc = "[F]ormat" })
 
 vim.keymap.set("n", "<A-o>",
     function()
@@ -64,22 +50,6 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Append to current paragraph" })
 
-vim.keymap.set("n", "<A-w>",
-    function()
-        local buffers = vim.api.nvim_list_bufs()
-        local numNonEmptyBuffers = 0
-        for _, bufnr in ipairs(buffers) do
-            if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buftype') == '' and
-                vim.api.nvim_buf_get_name(bufnr) ~= "" then
-                numNonEmptyBuffers = numNonEmptyBuffers + 1
-            end
-        end
-        if numNonEmptyBuffers > 1 then
-            vim.cmd.bd()
-        end
-    end
-)
-
 vim.keymap.set("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>", { desc = "Go to next buffer" })     --"  cycle next buffer"
 vim.keymap.set("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>", { desc = "Go to previous buffer" }) --"  cycle prev buffer"
 vim.keymap.set("n", "<A->>", "<cmd> BufferLineMoveNext <CR>", { desc = "Move next buffer" })       --"  cycle next buffer"
@@ -96,3 +66,20 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix" })
 
 vim.keymap.set("n", "<leader>ti", ":InlayHintsToggle <CR>", { desc = "[T]oggle [I]nlay hints" })
+
+vim.keymap.set("n", "<A-w>",
+    function()
+        local buffers = vim.api.nvim_list_bufs()
+        local numNonEmptyBuffers = 0
+        for _, bufnr in ipairs(buffers) do
+            if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buftype') == '' and
+                vim.api.nvim_buf_get_name(bufnr) ~= "" then
+                numNonEmptyBuffers = numNonEmptyBuffers + 1
+            end
+        end
+        if numNonEmptyBuffers > 1 then
+            vim.cmd.bd()
+        end
+    end,
+    { desc = "Close current buffer" }
+)
