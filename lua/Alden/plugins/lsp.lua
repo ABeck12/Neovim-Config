@@ -120,7 +120,8 @@ return {
                 end
 
                 if client.config.name == "clangd" then
-                    vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader ,{ desc = "LSP: Swap source and header C/C++" })
+                    vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader,
+                        { desc = "LSP: Swap source and header C/C++" })
                 else
                     vim.keymap.set("n", "<A-o>", "<nop>")
                 end
