@@ -118,6 +118,12 @@ return {
                         callback = vim.lsp.buf.clear_references,
                     })
                 end
+
+                if client.config.name == "clangd" then
+                    vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader ,{ desc = "LSP: Swap source and header C/C++" })
+                else
+                    vim.keymap.set("n", "<A-o>", "<nop>")
+                end
             end
         })
     end

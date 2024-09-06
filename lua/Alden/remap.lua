@@ -21,17 +21,6 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "[Y]ank to system clipboard" 
 
 vim.keymap.set("n", "<leader>f", utils.format, { desc = "[F]ormat" })
 
-vim.keymap.set("n", "<A-o>",
-    function()
-        vim.cmd("w")
-        local status_ok = pcall(vim.cmd.ClangdSwitchSourceHeader)
-        if not status_ok then
-            return
-        end
-    end,
-    { desc = "LSP: Swap source and header C/C++" }
-)
-
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
