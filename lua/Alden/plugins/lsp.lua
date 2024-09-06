@@ -17,8 +17,8 @@ return {
 
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-        "j-hui/fidget.nvim",   -- for the pop ups in the bottom right
-        "onsails/lspkind.nvim" -- for ui
+        { "j-hui/fidget.nvim", opts = {} }, -- for the pop ups in the bottom right
+        "onsails/lspkind.nvim"        -- for ui
     },
 
     config = function()
@@ -31,7 +31,6 @@ return {
             cmp_lsp.default_capabilities()
         )
 
-        require("fidget").setup()
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -123,7 +122,8 @@ return {
             window = {
                 documentation = {
                     -- border = "rounded",                                                                         -- single|rounded|none
-                    winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
+                    winhighlight =
+                    "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
                 },
                 completion = {
                     winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
@@ -138,7 +138,8 @@ return {
             formatting = {
                 fields = { "kind", "abbr", "menu" },
                 format = function(entry, vim_item)
-                    local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+                    local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(
+                        entry, vim_item)
                     local strings = vim.split(kind.kind, "%s", { trimempty = true })
                     kind.kind = " " .. (strings[1] or "") .. " "
                     kind.menu = "    (" .. (strings[2] or "") .. ")"
