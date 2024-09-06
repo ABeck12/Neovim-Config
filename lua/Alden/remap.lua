@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("Alden.utils")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Explore, { desc = "[P]re[v]iew File Tree", noremap = true })
 
@@ -64,8 +64,6 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix" })
-
-vim.keymap.set("n", "<leader>ti", ":InlayHintsToggle <CR>", { desc = "[T]oggle [I]nlay hints" })
 
 vim.keymap.set("n", "<A-w>",
     function()

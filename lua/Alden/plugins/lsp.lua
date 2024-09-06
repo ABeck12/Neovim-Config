@@ -4,25 +4,16 @@ return {
     event = {
         "BufReadPre", "BufNewFile"
     },
+
     dependencies = {
         "williamboman/mason.nvim",
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
         "williamboman/mason-lspconfig.nvim",
 
-        -- cmp is an auto complete framework
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
-
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
-        { "j-hui/fidget.nvim", opts = {} }, -- for the pop ups in the bottom right
-        "onsails/lspkind.nvim"        -- for ui
     },
 
     config = function()
-        local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = vim.tbl_deep_extend(
             "force",
@@ -93,86 +84,41 @@ return {
             }
         })
 
-        -- Setting up dropdown menu config
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                end,
-            },
+        vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(event)
+                local norrmap = function(keys, func, desc)
+                    vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                end
 
-            mapping = cmp.mapping.preset.insert({
-                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                -- ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<Enter>"] = cmp.mapping.confirm({ select = true }),
-                ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-            }),
+                norrmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+                norrmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+                norrmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+                norrmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+                norrmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+                norrmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+                norrmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+                norrmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+                norrmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' }, -- For luasnip users.
-            }, {
-                { name = 'buffer' },
-            }),
+                norrmap('<leader>ti', function()
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+                end, '[T]oggle [I]nlay Hints')
 
-            -- ui settings for cmp
-            window = {
-                documentation = {
-                    -- border = "rounded",                                                                         -- single|rounded|none
-                    winhighlight =
-                    "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
-                },
-                completion = {
-                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-                    -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
-                    -- border = "rounded", -- single|rounded|none
-                    col_offset = -3,
-                    side_padding = 0,
-                },
-            },
+                vim.lsp.inlay_hint.enable()
 
-            -- formatting determines how each item in the auto complete dropdown will look
-            formatting = {
-                fields = { "kind", "abbr", "menu" },
-                format = function(entry, vim_item)
-                    local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(
-                        entry, vim_item)
-                    local strings = vim.split(kind.kind, "%s", { trimempty = true })
-                    kind.kind = " " .. (strings[1] or "") .. " "
-                    kind.menu = "    (" .. (strings[2] or "") .. ")"
-                    return kind
-                end,
-            },
+                local client = vim.lsp.get_client_by_id(event.data.client_id)
+                if client and client.server_capabilities.documentHighlightProvider then
+                    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                        buffer = event.buf,
+                        callback = vim.lsp.buf.document_highlight,
+                    })
 
-            -- formatting = {
-            --     format = function(entry, vim_item),
-            --         if vim.tbl_contains({ 'path' }, entry.source.name) then
-            --             local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
-            --             if icon then
-            --                 vim_item.kind = icon
-            --                 vim_item.kind_hl_group = hl_group
-            --                 return vim_item
-            --             end
-            --         end
-            --         return require("lspkind").cmp_format({ with_text = false })(entry, vim_item)
-            --     end,
-            -- },
-
-        })
-
-        vim.diagnostic.config({
-            float = {
-                focusable = false,
-                style = "minimal",
-                -- border = "rounded",
-                source = "always",
-                header = "",
-                prefix = "",
-            },
+                    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+                        buffer = event.buf,
+                        callback = vim.lsp.buf.clear_references,
+                    })
+                end
+            end
         })
     end
-
 }
