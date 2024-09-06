@@ -80,37 +80,6 @@ vim.keymap.set("n", "<A-w>",
     end
 )
 
--- vim.keymap.set("n", "<A-w>",
---     function()
---         local buffers = vim.api.nvim_list_bufs()
---         local numNonEmptyBuffers = 0
---         for _, bufnr in ipairs(buffers) do
---             if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buftype') == '' and
---                 vim.api.nvim_buf_get_name(bufnr) ~= "" then
---                 numNonEmptyBuffers = numNonEmptyBuffers + 1
---             end
---         end
-
---         if numNonEmptyBuffers > 0 then
---             vim.cmd.bd()
---         end
-
---         local buffers2 = vim.api.nvim_list_bufs()
---         local numEmptyBuffers2 = 0
---         for _, bufnr in ipairs(buffers2) do
---             if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buftype') == '' and
---                 vim.api.nvim_buf_get_name(bufnr) == "" then
---                 numEmptyBuffers2 = numEmptyBuffers2 + 1
---             end
---         end
-
---         if numEmptyBuffers2 == 1 then
---             vim.cmd.Alpha()
---         end
---     end,
---     { desc = "Close current buffer" }
--- )
-
 vim.keymap.set("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>", { desc = "Go to next buffer" })     --"  cycle next buffer"
 vim.keymap.set("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>", { desc = "Go to previous buffer" }) --"  cycle prev buffer"
 vim.keymap.set("n", "<A->>", "<cmd> BufferLineMoveNext <CR>", { desc = "Move next buffer" })       --"  cycle next buffer"
