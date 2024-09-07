@@ -54,19 +54,4 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagn
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix" })
 
-vim.keymap.set("n", "<A-w>",
-    function()
-        local buffers = vim.api.nvim_list_bufs()
-        local numNonEmptyBuffers = 0
-        for _, bufnr in ipairs(buffers) do
-            if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, 'buftype') == '' and
-                vim.api.nvim_buf_get_name(bufnr) ~= "" then
-                numNonEmptyBuffers = numNonEmptyBuffers + 1
-            end
-        end
-        if numNonEmptyBuffers > 1 then
-            vim.cmd.bd()
-        end
-    end,
-    { desc = "Close current buffer" }
-)
+vim.keymap.set("n", "<A-w>", utils.close_if_not_last_opened, { desc = "Close current buffer" })

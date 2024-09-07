@@ -29,7 +29,18 @@ return {
                     delay = 50,
                     reveal = { 'close' }
                 },
-            }
+
+                custom_filter = function(buf, buf_nums)
+                    if not vim.bo[buf].filetype == "help" then
+                        return false
+                    end
+                    if not vim.fn.bufname(buf):match("[No Name]") then
+                        return false
+                    end
+
+                    return true
+                end,
+            },
         })
     end
 
