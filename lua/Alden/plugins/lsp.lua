@@ -27,7 +27,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                -- "rust_analyzer",
+                "rust_analyzer",
                 "clangd",
                 "basedpyright",
                 "ruff_lsp",
@@ -58,7 +58,9 @@ return {
                     lspconfig.clangd.setup {
                         capabilities = capabilities,
                         cmd = {
-                            "clangd", "--header-insertion=never"
+                            "clangd",
+                            "--header-insertion=never",
+                            "--clang-tidy"
                         }
                     }
                 end,
