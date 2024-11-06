@@ -8,7 +8,7 @@ return {
         bufferline.setup({
             highlights = {
                 fill= {
-                    bg = "#16161e" -- This is the same color as the status bar background
+                    bg = "#13141c" -- This is the same color as the status bar background
                 }
             },
             options = {

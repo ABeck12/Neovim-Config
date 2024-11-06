@@ -33,13 +33,13 @@ vim.opt.termguicolors = true
 local function set_line_number_colors()
     local orange = "#ff9e64"
     -- local light_blue = "#7aa2f7"
-    -- local whiteish = '#a9b1d6'
-    local electric_blue = "#51b3ec"
-    local electric_red = "#fb508f"
+    local whiteish = '#a9b1d6'
+    -- local electric_blue = "#51b3ec"
+    -- local electric_red = "#fb508f"
 
-    vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = electric_blue, bold = true })
+    vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = whiteish, bold = false })
     vim.api.nvim_set_hl(0, 'LineNr', { fg = orange, bold = true })
-    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = electric_red, bold = true })
+    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = whiteish, bold = false})
 end
 set_line_number_colors()
 
