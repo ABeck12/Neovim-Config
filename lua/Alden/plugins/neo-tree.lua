@@ -12,7 +12,7 @@ return {
     --     vim.keymap.set("n", "<C-b>", ":Neotree toggle<cr>", { noremap = true })
     --     require("neo-tree").setup({
     --         close_if_last_window = true,
-    --         -- sources = { "filesystem", "buffers", "git_status" },
+    --         sources = { "filesystem", "buffers", "git_status" },
     --         window = {
     --             position = "left",
     --             width = 34,
@@ -47,11 +47,11 @@ return {
     --                 symbols = {
     --                     -- Change type
     --                     added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-    --                     modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-    --                     deleted   = "✖", -- this can only be used in the git_status source
-    --                     renamed   = "󰁕", -- this can only be used in the git_status source
+    --                     modified  = "M", -- or "", but this is redundant info if you use git_status_colors on the name
+    --                     deleted   = "D", -- this can only be used in the git_status source
+    --                     -- renamed   = "󰁕", -- this can only be used in the git_status source
     --                     -- Status type
-    --                     untracked = "",
+    --                     untracked = "U",
     --                     ignored   = "",
     --                     unstaged  = "",
     --                     staged    = "",

@@ -6,6 +6,11 @@ return {
     config = function()
         local bufferline = require("bufferline")
         bufferline.setup({
+            highlights = {
+                fill= {
+                    bg = "#16161e" -- This is the same color as the status bar background
+                }
+            },
             options = {
                 themable = false,
                 show_tab_indicators = true,
