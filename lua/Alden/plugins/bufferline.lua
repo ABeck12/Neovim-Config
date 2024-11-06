@@ -7,10 +7,13 @@ return {
         local bufferline = require("bufferline")
         bufferline.setup({
             options = {
-                themable = true,
+                themable = false,
                 show_tab_indicators = true,
                 -- separator_style = "slant",
                 diagnostics = "nvim_lsp",
+                indicator = {
+                    style = "none"
+                },
                 style_preset = {
                     bufferline.style_preset.no_italic,
                     bufferline.style_preset.no_bold
