@@ -100,6 +100,7 @@ return {
                 norrmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
                 norrmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
                 norrmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+                norrmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
                 norrmap('K', vim.lsp.buf.hover, 'Hover Documentation')
                 norrmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 

@@ -18,6 +18,7 @@ return {
         vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "[P]review [F]iles" })
         vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = "[P]review [G]it Files" })
         vim.keymap.set('n', '<leader>pr', builtin.oldfiles, { desc = "[P]review [R]ecent Files" })
+        vim.keymap.set('n', '<leader>lg', builtin.live_grep, { desc = "[L]ive [G]rep" })
 
         vim.keymap.set('n', '<leader>/', function()
             -- You can pass additional configuration to Telescope to change the theme, layout, etc.

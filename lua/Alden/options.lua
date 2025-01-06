@@ -5,7 +5,7 @@ vim.opt.relativenumber = true
 
 vim.opt.scrolloff = 10
 
-vim.opt.guicursor = "n-v-i-c:block-Cursor"
+-- vim.opt.guicursor = "n-v-i-c:block-Cursor"
 
 vim.opt.updatetime = 50
 
