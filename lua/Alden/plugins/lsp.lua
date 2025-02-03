@@ -30,7 +30,6 @@ return {
                 "rust_analyzer",
                 "clangd",
                 "basedpyright",
-                "ruff_lsp",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -59,8 +58,9 @@ return {
                         capabilities = capabilities,
                         cmd = {
                             "clangd",
+                            "--experimental-modules-support",
                             "--header-insertion=never",
-                            "--clang-tidy"
+                            "--clang-tidy",
                         }
                     }
                 end,
