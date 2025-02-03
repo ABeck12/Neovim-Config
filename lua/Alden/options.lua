@@ -23,7 +23,8 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Colors
-vim.cmd [[colorscheme tokyonight-night]]
+-- vim.cmd [[colorscheme tokyonight-night]]
+vim.cmd [[colorscheme everforest]]
 -- vim.cmd [[colorscheme darcula]]
 -- vim.cmd [[colorscheme kanagawa-dragon]]
 -- vim.cmd [[colorscheme rose-pine]]
@@ -52,7 +53,7 @@ local function dissable_italics()
         end
     end
 end
-dissable_italics()
+-- dissable_italics()
 
 -- Maximum number of items to show in a popup
 vim.o.pumheight = 15

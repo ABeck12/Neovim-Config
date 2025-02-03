@@ -7,9 +7,9 @@ return {
         local bufferline = require("bufferline")
         bufferline.setup({
             highlights = {
-                fill= {
-                    bg = "#13141c" -- This is the same color as the status bar background
-                }
+                -- fill= {
+                --     bg = "#13141c" -- This is the same color as the status bar background
+                -- }
             },
             options = {
                 themable = false,
