@@ -4,7 +4,13 @@ return {
         "neanias/everforest-nvim",
         config = function()
             local everforest = require("everforest")
-            everforest.setup({ background = "hard"})
+            everforest.setup({
+                background = "hard",
+                italics = true,
+                colours_override = function(palette)
+                    palette.bg0 = "#1e2326"
+                end
+            })
             everforest.load()
         end
     }

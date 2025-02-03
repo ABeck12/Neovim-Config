@@ -42,7 +42,7 @@ local function set_line_number_colors()
     vim.api.nvim_set_hl(0, 'LineNr', { fg = orange, bold = true })
     vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = whiteish, bold = false})
 end
-set_line_number_colors()
+-- set_line_number_colors()
 
 -- Force dissable italics for any theme
 local function dissable_italics()
