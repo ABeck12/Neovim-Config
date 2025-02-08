@@ -40,4 +40,19 @@ function utils.close_if_not_last_opened()
     end
 end
 
+function utils.swap_impl_module_file_cpp()
+    local current_file = vim.fn.expand("%:r")
+    local current_extension = vim.fn.expand("%:e")
+
+    local target_extension = (current_extension == "cpp") and "cppm" or "cpp"
+
+    local target_file = current_file .. "." .. target_extension
+
+    if vim.fn.filereadable(target_file) == 1 then
+        vim.cmd("e " .. target_file)
+    else
+        print("Target file does not exist: " .. target_file)
+    end
+end
+
 return utils
