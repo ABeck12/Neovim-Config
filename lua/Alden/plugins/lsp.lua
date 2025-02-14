@@ -1,3 +1,5 @@
+local utils = require("Alden.utils")
+
 return {
     "neovim/nvim-lspconfig",
 
@@ -30,6 +32,7 @@ return {
                 "rust_analyzer",
                 "clangd",
                 "basedpyright",
+                "ruff"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -123,8 +126,20 @@ return {
                     })
                 end
 
+                local function switch_source_header()
+                    local current_file = vim.fn.expand('%')
+                    vim.cmd.ClangdSwitchSourceHeader()
+                    vim.defer_fn(function()
+                        local new_file = vim.fn.expand('%')
+
+                        if current_file == new_file then
+                            utils.swap_impl_module_file_cpp()
+                        end
+                    end, 50) -- Delay of 50ms as clangd swap is async
+                end
+
                 if client.config.name == "clangd" then
-                    vim.keymap.set("n", "<A-o>", vim.cmd.ClangdSwitchSourceHeader,
+                    vim.keymap.set("n", "<A-o>", switch_source_header,
                         { desc = "LSP: Swap source and header C/C++" })
                 else
                     vim.keymap.set("n", "<A-o>", "<nop>")
