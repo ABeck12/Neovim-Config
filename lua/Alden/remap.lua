@@ -55,3 +55,8 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix" })
 
 vim.keymap.set("n", "<A-w>", utils.close_if_not_last_opened, { desc = "Close current buffer" })
+
+vim.keymap.set("n", "<", "V<")
+vim.keymap.set("n", ">", "V>")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
