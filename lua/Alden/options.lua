@@ -44,6 +44,17 @@ local function set_line_number_colors()
 end
 -- set_line_number_colors()
 
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "",
+      [vim.diagnostic.severity.HINT]  = "",
+    },
+  },
+})
+
 -- Force dissable italics for any theme
 local function dissable_italics()
     local hl_groups = vim.api.nvim_get_hl(0, {})
@@ -68,3 +79,18 @@ vim.g.netrw_banner = 0
 vim.opt.swapfile = false
 vim.opt.backup = false
 
+-- Folds
+vim.opt.foldcolumn = "1"
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.opt.foldmethod = "expr"
+vim.opt.foldlevel = 99
+
+vim.o.statuscolumn = '%s%=%l %#FoldColumn#%{'
+    .. 'foldlevel(v:lnum) > foldlevel(v:lnum - 1)'
+    .. '? foldclosed(v:lnum) == -1'
+    .. '? ""'
+    .. ': ""'
+    .. ': foldlevel(v:lnum) == 0'
+    .. '? " "'
+    .. ': " "'
+    .. '} '
