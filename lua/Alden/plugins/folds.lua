@@ -1,22 +1,21 @@
--- These are not needed when using nvim-ufo plugin
--- function FoldText()
---     local line = vim.fn.getline(vim.v.foldstart)
---     local numOfLines = vim.v.foldend - vim.v.foldstart
---     local fillCount = vim.fn.winwidth('%') - #line - #tostring(numOfLines) - 14
---     return line .. '  ' .. string.rep('.', fillCount) .. ' (' .. numOfLines .. ' L)'
--- end
--- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- vim.opt.foldtext = [[v:lua.FoldText()]]
-
 vim.opt.foldcolumn = "1"
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
-vim.opt.fillchars:append({ fold = ' ' }) -- removes trailing dots
+
+vim.o.statuscolumn = '%s%=%l %#FoldColumn#%{'
+    .. 'foldlevel(v:lnum) > foldlevel(v:lnum - 1)'
+    .. '? foldclosed(v:lnum) == -1'
+    .. '? ""'
+    .. ': ""'
+    .. ': foldlevel(v:lnum) == 0'
+    .. '? " "'
+    .. ': " "'
+    .. '} '
 
 return {
     "kevinhwang91/nvim-ufo",
     dependencies = { 'kevinhwang91/promise-async' },
-
     config = function()
         require("ufo").setup({
             provider_selector = function(bufnr, filetype, buftype)
@@ -25,3 +24,4 @@ return {
         })
     end
 }
+-- See https://github.com/kevinhwang91/nvim-ufo/issues/4 for more info on good setups
