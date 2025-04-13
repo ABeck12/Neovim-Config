@@ -40,7 +40,7 @@ local function set_line_number_colors()
 
     vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = whiteish, bold = false })
     vim.api.nvim_set_hl(0, 'LineNr', { fg = orange, bold = true })
-    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = whiteish, bold = false})
+    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = whiteish, bold = false })
 end
 -- set_line_number_colors()
 
@@ -67,3 +67,19 @@ vim.g.netrw_banner = 0
 
 vim.opt.swapfile = false
 vim.opt.backup = false
+
+-- Folds
+if false then
+    function FoldText()
+        local line = vim.fn.getline(vim.v.foldstart)
+        local numOfLines = vim.v.foldend - vim.v.foldstart
+        local fillCount = vim.fn.winwidth('%') - #line - #tostring(numOfLines) - 14
+        return line .. '  ' .. string.rep('.', fillCount) .. ' (' .. numOfLines .. ' L)'
+    end
+
+    vim.opt.foldcolumn = "0"
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.opt.foldtext = [[v:lua.FoldText()]]
+    vim.opt.fillchars:append({ fold = ' ' }) -- removes trailing dots
+end
