@@ -1,4 +1,4 @@
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -14,7 +14,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.cmd 'set signcolumn=yes'
+vim.opt.signcolumn = "yes"
 
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
