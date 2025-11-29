@@ -14,7 +14,7 @@ return {
             options = {
                 themable = false,
                 show_tab_indicators = true,
-                -- separator_style = "slant",
+                separator_style = "thick",
                 diagnostics = "nvim_lsp",
                 indicator = {
                     style = "none"

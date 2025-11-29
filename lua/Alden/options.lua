@@ -1,3 +1,22 @@
+local theme = require("Alden.theme")
+
+vim.g.netrw_keepdir = 0
+vim.g.netrw_preview = 1
+vim.g.netrw_browse_split = 4
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "netrw",
+    callback = function()
+        vim.keymap.set("n", "p", function()
+            -- close existing preview window
+            if vim.wo.previewwindow then
+                vim.cmd("quit")
+            end
+            -- trigger built-in netrw preview
+            vim.cmd("normal! p")
+        end, { buffer = true, silent = true })
+    end,
+})
+
 vim.g.have_nerd_font = true
 
 vim.opt.number = true
@@ -5,6 +24,7 @@ vim.opt.relativenumber = true
 
 vim.opt.scrolloff = 10
 
+-- Set block cursor for all modes
 -- vim.opt.guicursor = "n-v-i-c:block-Cursor"
 
 vim.opt.updatetime = 50
@@ -22,13 +42,8 @@ vim.opt.hlsearch = true
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
--- Colors
--- vim.cmd [[colorscheme tokyonight-night]]
-vim.cmd [[colorscheme everforest]]
--- vim.cmd [[colorscheme darcula]]
--- vim.cmd [[colorscheme kanagawa-dragon]]
--- vim.cmd [[colorscheme rose-pine]]
-
+-- Theme
+vim.cmd("colorscheme " .. theme.name)
 vim.opt.termguicolors = true
 
 local function set_line_number_colors()
@@ -45,14 +60,14 @@ end
 -- set_line_number_colors()
 
 vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN]  = "",
-      [vim.diagnostic.severity.INFO]  = "",
-      [vim.diagnostic.severity.HINT]  = "",
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN]  = "",
+            [vim.diagnostic.severity.INFO]  = "",
+            [vim.diagnostic.severity.HINT]  = "",
+        },
     },
-  },
 })
 
 -- Force dissable italics for any theme
@@ -94,3 +109,11 @@ vim.o.statuscolumn = '%s%=%l %#FoldColumn#%{'
     .. '? " "'
     .. ': " "'
     .. '} '
+
+-- Opt out of default lsp keymaps
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'grt')
+vim.keymap.del('n', 'gO')

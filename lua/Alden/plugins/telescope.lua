@@ -1,6 +1,5 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.6',
     dependencies = {
         'nvim-lua/plenary.nvim',
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -15,10 +14,10 @@ return {
         telescope.setup()
         telescope.load_extension("fzf")
 
-        vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "[P]review [F]iles" })
-        vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = "[P]review [G]it Files" })
-        vim.keymap.set('n', '<leader>pr', builtin.oldfiles, { desc = "[P]review [R]ecent Files" })
-        vim.keymap.set('n', '<leader>lg', builtin.live_grep, { desc = "[L]ive [G]rep" })
+        vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "Preview Files" })
+        vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = "Preview Git Files" })
+        vim.keymap.set('n', '<leader>pr', builtin.oldfiles, { desc = "Preview Recent Files" })
+        vim.keymap.set('n', '<leader>lg', builtin.live_grep, { desc = "Live Grep" })
 
         vim.keymap.set('n', '<leader>/', function()
             -- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -26,7 +25,6 @@ return {
                 winblend = 10,
                 previewer = false,
             })
-        end, { desc = '[/] Fuzzily search in current buffer' })
-
+        end, { desc = 'Fuzzily search in current buffer' })
     end
 }

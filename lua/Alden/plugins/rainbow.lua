@@ -4,10 +4,10 @@ return {
     config = function()
         vim.g.rainbow_delimiters = {
             highlight = {
+                "FFFFFF",
                 'RainbowDelimiterYellow',
-                "FFFFFF"
+                'RainbowDelimiterViolet',
                 -- 'RainbowDelimiterRed',
-                -- 'RainbowDelimiterViolet',
                 -- 'RainbowDelimiterBlue',
                 -- 'RainbowDelimiterGreen',
                 -- 'RainbowDelimiterOrange',
