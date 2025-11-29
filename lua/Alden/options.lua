@@ -1,22 +1,5 @@
 local theme = require("Alden.theme")
 
-vim.g.netrw_keepdir = 0
-vim.g.netrw_preview = 1
-vim.g.netrw_browse_split = 4
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "netrw",
-    callback = function()
-        vim.keymap.set("n", "p", function()
-            -- close existing preview window
-            if vim.wo.previewwindow then
-                vim.cmd("quit")
-            end
-            -- trigger built-in netrw preview
-            vim.cmd("normal! p")
-        end, { buffer = true, silent = true })
-    end,
-})
-
 vim.g.have_nerd_font = true
 
 vim.opt.number = true

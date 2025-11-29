@@ -104,6 +104,26 @@ vim.lsp.config['clangd'] = {
 vim.lsp.enable("clangd")
 
 
+vim.lsp.config['pyright'] = {
+    cmd = { 'pyright-langserver', '--stdio' },
+    filetypes = { 'python' },
+    root_markers = { '.git', 'pyproject.toml' },
+    settings = {
+        pyright = {
+            autoImportCompletion = true,
+            disableOrganizeImports = false,
+        },
+        python = {
+            analysis = {
+                typeCheckingMode = "strict"
+            },
+            -- pythonPath = vim.fn.exepath("python3"),
+        }
+    },
+}
+vim.lsp.enable("pyright")
+
+
 
 vim.lsp.config['rust-analyzer'] = {
     cmd = { 'rust-analyzer' },
@@ -120,4 +140,3 @@ vim.lsp.config('*', {
     capabilities = capabilities,
     on_attach = default_lsp_on_attach
 })
-
