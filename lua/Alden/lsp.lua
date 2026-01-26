@@ -115,7 +115,8 @@ vim.lsp.config['pyright'] = {
         },
         python = {
             analysis = {
-                typeCheckingMode = "strict"
+                typeCheckingMode = "strict",
+                inlayHints=true
             },
             -- pythonPath = vim.fn.exepath("python3"),
         }
@@ -124,13 +125,29 @@ vim.lsp.config['pyright'] = {
 vim.lsp.enable("pyright")
 
 
-
 vim.lsp.config['rust-analyzer'] = {
     cmd = { 'rust-analyzer' },
     filetypes = { 'rust' },
     root_markers = { '.git', 'Cargo.toml' },
 }
 vim.lsp.enable("rust-analyzer")
+
+
+vim.lsp.config['bashls'] = {
+    cmd = { 'bash-language-server', 'start' },
+    filetypes = { 'sh', 'bash', 'inc', 'zsh' },
+    root_markers = { '.git' },
+    single_file_support = true, -- Important for standalone scripts
+    settings = {
+        bashIde = {
+            -- Glob pattern to find other scripts to analyze in the workspace
+            globPattern = "**/*@(.sh|.inc|.bash|.command)", 
+        }
+    },
+    capabilities = setup_capabilities(),
+    on_attach = default_lsp_on_attach,
+}
+vim.lsp.enable("bashls")
 
 
 -- Default lsp setup
